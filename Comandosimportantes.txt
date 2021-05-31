@@ -6,3 +6,4 @@ nohup <nomeprocesso> &
 
 
 Teste Pull
+Teste Push

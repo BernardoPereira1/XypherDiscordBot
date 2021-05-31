@@ -1,0 +1,5 @@
+Matar um processo:
+killall <nomeprocesso>
+
+Começar um processo infinitamente
+nohup <nomeprocesso> &

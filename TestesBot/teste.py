@@ -9,6 +9,7 @@ import DiscordUtils
 import asyncio
 from datetime import datetime, timedelta
 import csv
+import pytz
 from discord.utils import get
 
 
@@ -31,7 +32,7 @@ sala_texto_admin = 839182749758652557
 sala_do_20 = 839182750673666124
 
 #Variaveis
-time = datetime.now()
+time = datetime.now(pytz.timezone('Europe/Lisbon'))
 
 
 #ID's para o comando exame 
@@ -58,7 +59,7 @@ async def exame(ctx, inicioprova, primeirotempo, segundotempo, finalprova, link)
 
     # Variaveis utilizadas neste comando
     channel = bot.get_channel(sala_do_20)  # ID do canal "Sala do 20"
-    provainicio = datetime.now() + timedelta(minutes=int(inicioprova))
+    provainicio = time + timedelta(minutes=int(inicioprova))
     periodo1 = provainicio + timedelta(minutes=int(primeirotempo))
     periodo2 = periodo1 + timedelta(minutes=int(segundotempo))
     tempofinal = periodo2 + timedelta(minutes=int(finalprova))

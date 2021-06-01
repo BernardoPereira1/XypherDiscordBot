@@ -1,3 +1,6 @@
+Ver Processos:
+ps ux
+
 Matar um processo:
 killall <nomeprocesso>
 

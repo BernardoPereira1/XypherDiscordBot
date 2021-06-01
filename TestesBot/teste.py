@@ -121,36 +121,36 @@ async def on_message(ctx):
 @commands.has_role(role_admin)
 async def presencas(ctx, canal = None):
     if canal == None:
-        await ctx.send('Presenças no servidor no dia: ' + str(datetime.now().date()) + ' às ' + time.strftime(r"%H:%M") + 'H')
-        with open('presencas_' + str(datetime.now().date()) + '.csv', 'w', newline='') as file:
+        for user in ctx.guild.members:
+            await ctx.send('Presenças no servidor no dia: ' + str(datetime.now().date()) + ' às ' + time.strftime(r"%H:%M") + 'H')
+            with open('presencas_' + str(datetime.now().date()) + '.csv', 'w', newline='') as file:
 
-            writer = csv.writer(file, delimiter=':', quoting=csv.QUOTE_NONE)
-            writer.writerow(['Nome, tag, timestamp'])
+                writer = csv.writer(file, delimiter=':', quoting=csv.QUOTE_NONE)
+                writer.writerow(['Nome, tag, timestamp'])
 
-            for user in ctx.guild.members:
-                writer = csv.writer(file, delimiter='"', quoting=csv.QUOTE_NONE)
-                if user.status != discord.Status.offline:
-                    writer.writerow([user.name + ', ' + '#'+user.discriminator + ', ' +str(datetime.now().date()) + ' ' + time.strftime(r"%H:%M") + 'H'])
+                for user in ctx.guild.members:
+                    writer = csv.writer(file, delimiter='"', quoting=csv.QUOTE_NONE)
+                    if user.status != discord.Status.offline:
+                        writer.writerow([user.name + ', ' + '#'+user.discriminator + ', ' +str(datetime.now().date()) + ' ' + time.strftime(r"%H:%M") + 'H'])
 
-        await ctx.send(file=discord.File(r'presencas_' + str(datetime.now().date()) + '.csv'))
+            await ctx.send(file=discord.File(r'presencas_' + str(datetime.now().date()) + '.csv'))
 
     else:
-
-        channel = bot.get_channel(int(canal))  # Canal de onde a lista vem
-        members = channel.members  # Encontra os membros que estão no canal
-
-        await ctx.send('Presenças no canal ' + channel.name + ' no dia ' + str(datetime.now().date()) + ' às ' + time.strftime(r"%H:%M") + 'H')
-        with open('presencas_canal_' + channel.name + '_' + str(datetime.now().date()) + '.csv', 'w', newline='') as file:
-
-            writer = csv.writer(file, delimiter=':', quoting=csv.QUOTE_NONE)
-            writer.writerow(['Nome, tag, timestamp'])
-
+            channel = bot.get_channel(int(canal))  # Canal de onde a lista vem
+            members = channel.members  # Encontra os membros que estão no canal
             for user in members:
-                writer = csv.writer(file, delimiter='"', quoting=csv.QUOTE_NONE)
-                if user.status != discord.Status.offline:
-                    writer.writerow([user.name + ', ' + '#'+user.discriminator + ', ' +str(datetime.now().date()) + ' ' + time.strftime(r"%H:%M") + 'H'])
+                await ctx.send('Presenças no canal ' + channel.name + ' no dia ' + str(datetime.now().date()) + ' às ' + time.strftime(r"%H:%M") + 'H')
+                with open('presencas_canal_' + channel.name + '_' + str(datetime.now().date()) + '.csv', 'w', newline='') as file:
 
-        await ctx.send(file=discord.File(r'presencas_canal_' + channel.name + '_' + str(datetime.now().date()) + '.csv'))
+                    writer = csv.writer(file, delimiter=':', quoting=csv.QUOTE_NONE)
+                    writer.writerow(['Nome, tag, timestamp'])
+
+            
+                    writer = csv.writer(file, delimiter='"', quoting=csv.QUOTE_NONE)
+                    if user.status != discord.Status.offline:
+                        writer.writerow([user.name + ', ' + '#'+user.discriminator + ', ' +str(datetime.now().date()) + ' ' + time.strftime(r"%H:%M") + 'H'])
+
+            await ctx.send(file=discord.File(r'presencas_canal_' + channel.name + '_' + str(datetime.now().date()) + '.csv'))
 
 
 # Lembrete Eventos

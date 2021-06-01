@@ -74,8 +74,7 @@ async def exame(ctx, inicioprova, primeirotempo, segundotempo, finalprova, link)
     await asyncio.sleep(int(inicioprova) * 60)
     await channel.send('\nBem-vindos à Prova de Simulação de hoje \n<@&'+aluno_id+'> Juntem-se ao canal de voz: "Sala do 20" para começarmos\n')
     linkprova = discord.Embed()
-    linkprova.description = "Clica no link para teres acesso à prova: " + \
-        (str(link))
+    linkprova.description = f'Clica no link para teres acesso à prova: [link]({link})'
     await channel.send(embed=linkprova)
     await channel.send('-------------------------------------------------------------------------------------------------------------')
 

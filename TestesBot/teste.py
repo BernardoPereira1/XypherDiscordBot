@@ -66,9 +66,8 @@ async def exame(ctx, inicioprova, primeirotempo, segundotempo, finalprova, link)
 
     # Informações sobre a prova
     await channel.send('-------------------------------------------------------------------------------------------------------------'
-                       '\nInício da prova: ' + str(provainicio) + 'H' + '\n1ºPeriodo até às: ' + str(periodo1.strftime(r"%H:%M")) + 'H' +
-                       '\n2º período até às: ' + str(periodo2.strftime(
-                           r"%H:%M")) + 'H' + '\nFinal da prova às: ' + str(tempofinal.strftime(r"%H:%M")) + 'H \n'
+                       '\nInício da prova: ' + str(provainicio.strftime(r"%H:%M")) + 'H' + '\n1ºPeriodo até às: ' + str(periodo1.strftime(r"%H:%M")) + 'H' +
+                       '\n2º período até às: ' + str(periodo2.strftime(r"%H:%M")) + 'H' + '\nFinal da prova às: ' + str(tempofinal.strftime(r"%H:%M")) + 'H \n'
                        '-------------------------------------------------------------------------------------------------------------')
 
     # Inicio da prova

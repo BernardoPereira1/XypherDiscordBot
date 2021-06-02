@@ -199,11 +199,9 @@ async def lembrete(ctx, arg):
 @bot.group(invoke_without_command=True)
 async def ajuda(ctx):
 
-    embed = discord.Embed(
-        title="Ajuda", description="Escreve !ajuda <comando> para obter informações sobre os mesmo!")
+    embed = discord.Embed(title="Ajuda", description="Escreve !ajuda <comando> para obter informações sobre os mesmo!")
 
-    embed.add_field(name="Comandos para admins",
-                    value="presencas,presencascanal, exame")
+    embed.add_field(name="Comandos para admins",value="presencas,presencascanal, exame")
     embed.add_field(name="Comandos", value="ola, numeromembros")
 
     await ctx.send(embed=embed)
@@ -216,13 +214,10 @@ async def exame(ctx):
 
     channel = bot.get_channel(sala_texto_admin)
 
-    embed = discord.Embed(
-        title="Comando Exame", description="Este comando permite começar um exame a qualquer hora")
+    embed = discord.Embed(title="Comando Exame", description="Este comando permite começar um exame a qualquer hora")
     embed.add_field(name="Como utilizar?", value="Escreve !exame")
-    embed.add_field(name="Onde se pode utilizar?",
-                    value="Em qualquer sala de texto")
-    embed.add_field(name='Onde é que começa o exame?',
-                    value='Na sala de texto "Sala do 20"')
+    embed.add_field(name="Onde se pode utilizar?",value="Em qualquer sala de texto")
+    embed.add_field(name='Onde é que começa o exame?',value='Na sala de texto "Sala do 20"')
 
     await channel.send(embed=embed)
 
@@ -235,13 +230,10 @@ async def presencas(ctx):
 
     channel = bot.get_channel(sala_texto_admin)
 
-    embed = discord.Embed(title="Comando Presenças",
-                          description="Este comando permite ver quantas pessoas estão online à hora que é dado o comando")
+    embed = discord.Embed(title="Comando Presenças",description="Este comando permite ver quantas pessoas estão online à hora que é dado o comando")
     embed.add_field(name="Como utilizar?", value="Escreve !presencas")
-    embed.add_field(name="Onde se pode utilizar?",
-                    value="Em qualquer sala de texto")
-    embed.add_field(name='Para onde são enviadas as presenças?',
-                    value='Para onde o comando foi dado')
+    embed.add_field(name="Onde se pode utilizar?",value="Em qualquer sala de texto")
+    embed.add_field(name='Para onde são enviadas as presenças?',value='Para onde o comando foi dado')
 
     await channel.send(embed=embed)
 
@@ -253,14 +245,10 @@ async def presencascanal(ctx):
 
     channel = bot.get_channel(sala_texto_admin)
 
-    embed = discord.Embed(title="Comando Presenças Canal",
-                          description="Este comando permite ver quantas pessoas estão online numa sala à hora que é dado o comando")
-    embed.add_field(name="Como utilizar?",
-                    value="Escreve o comando !presencascanal juntamente com o id do canal desejado")
-    embed.add_field(name="Onde se pode utilizar?",
-                    value="Em qualquer sala de texto")
-    embed.add_field(name='Para onde são enviadas as presenças?',
-                    value='Para onde o comando foi dado')
+    embed = discord.Embed(title="Comando Presenças Canal",description="Este comando permite ver quantas pessoas estão online numa sala à hora que é dado o comando")
+    embed.add_field(name="Como utilizar?",value="Escreve o comando !presencascanal juntamente com o id do canal desejado")
+    embed.add_field(name="Onde se pode utilizar?",value="Em qualquer sala de texto")
+    embed.add_field(name='Para onde são enviadas as presenças?',value='Para onde o comando foi dado')
 
     await channel.send(embed=embed)
 
@@ -269,11 +257,9 @@ async def presencascanal(ctx):
 @ajuda.command()
 async def ola(ctx):
 
-    embed = discord.Embed(
-        title="Comando Olá", description='Este comando faz com que o bot te responda "Olá"')
+    embed = discord.Embed(title="Comando Olá", description='Este comando faz com que o bot te responda "Olá"')
     embed.add_field(name="Como utilizar?", value="Escreve !ola")
-    embed.add_field(name="Onde se pode utilizar?",
-                    value="Em qualquer sala de texto")
+    embed.add_field(name="Onde se pode utilizar?",value="Em qualquer sala de texto")
 
     await ctx.send(embed=embed)
 
@@ -282,13 +268,46 @@ async def ola(ctx):
 @ajuda.command()
 async def numeromembros(ctx):
 
-    embed = discord.Embed(title="Comando Número de membros",
-                          description='Este comando permite ver o número de membros existentes no servidor')
+    embed = discord.Embed(title="Comando Número de membros",description='Este comando permite ver o número de membros existentes no servidor')
     embed.add_field(name="Como utilizar?", value="Escreve !numeromembros")
-    embed.add_field(name="Onde se pode utilizar?",
-                    value="Em qualquer sala de texto")
+    embed.add_field(name="Onde se pode utilizar?",value="Em qualquer sala de texto")
 
     await ctx.send(embed=embed)
+
+
+
+#Comando FAQ
+@bot.group(invoke_without_command=True)
+async def faq(ctx):
+
+    embed = discord.Embed(title="FAQ", description="Aqui estão algumas perguntas que são frequentemente feitas!")
+
+    embed.add_field(name="Número 1", value="Como utilizar os comandos?", inline=False)
+    embed.add_field(name="Número 2", value="Como envio as resoluções do plano semanal?", inline=False)
+
+    await ctx.send(embed=embed)
+
+
+# Comando de ajuda(exame) só para admins
+@faq.command()
+async def numero1(ctx):
+    
+    await ctx.send(ctx.message.author.mention)
+    
+    embed = discord.Embed(title="Como utilizar os comandos?", description='Usa "!" juntamente com o nome do comando')
+
+    await ctx.send(embed=embed)
+    
+    
+@faq.command()
+async def numero2(ctx):
+    
+    await ctx.send(ctx.message.author.mention)
+    
+    embed = discord.Embed(title="Como envio as resoluções do plano semanal?", description='Tira uma fotografia e envia um email para resolucoes@overfit.study')
+
+    await ctx.send(embed=embed)
+
 
 
 # Loop que apaga mensagens de 24 em 24 horas
@@ -314,4 +333,3 @@ ApagaMensagens.start()
 
 
 bot.run(token)
-

@@ -9,6 +9,7 @@ import DiscordUtils
 import asyncio
 from datetime import datetime, timedelta
 import csv
+import pytz
 from discord.utils import get
 
 
@@ -31,7 +32,7 @@ sala_texto_admin = 839182749758652557
 sala_do_20 = 839182750673666124
 
 #Variaveis
-time = datetime.now()
+time = datetime.now(pytz.timezone('Europe/Lisbon'))
 
 
 #ID's para o comando exame 
@@ -58,7 +59,7 @@ async def exame(ctx, inicioprova, primeirotempo, segundotempo, finalprova, link)
 
     # Variaveis utilizadas neste comando
     channel = bot.get_channel(sala_do_20)  # ID do canal "Sala do 20"
-    provainicio = datetime.now() + timedelta(minutes=int(inicioprova))
+    provainicio = time + timedelta(minutes=int(inicioprova))
     periodo1 = provainicio + timedelta(minutes=int(primeirotempo))
     periodo2 = periodo1 + timedelta(minutes=int(segundotempo))
     tempofinal = periodo2 + timedelta(minutes=int(finalprova))
@@ -66,16 +67,14 @@ async def exame(ctx, inicioprova, primeirotempo, segundotempo, finalprova, link)
     # Informações sobre a prova
     await channel.send('-------------------------------------------------------------------------------------------------------------'
                        '\nInício da prova: ' + str(provainicio.strftime(r"%H:%M")) + 'H' + '\n1ºPeriodo até às: ' + str(periodo1.strftime(r"%H:%M")) + 'H' +
-                       '\n2º período até às: ' + str(periodo2.strftime(
-                           r"%H:%M")) + 'H' + '\nFinal da prova às: ' + str(tempofinal.strftime(r"%H:%M")) + 'H \n'
+                       '\n2º período até às: ' + str(periodo2.strftime(r"%H:%M")) + 'H' + '\nFinal da prova às: ' + str(tempofinal.strftime(r"%H:%M")) + 'H \n'
                        '-------------------------------------------------------------------------------------------------------------')
 
     # Inicio da prova
     await asyncio.sleep(int(inicioprova) * 60)
     await channel.send('\nBem-vindos à Prova de Simulação de hoje \n<@&'+aluno_id+'> Juntem-se ao canal de voz: "Sala do 20" para começarmos\n')
     linkprova = discord.Embed()
-    linkprova.description = "Clica no link para teres acesso à prova: " + \
-        (str(link))
+    linkprova.description = f'Clica no link para teres acesso à prova: [link]({link})'
     await channel.send(embed=linkprova)
     await channel.send('-------------------------------------------------------------------------------------------------------------')
 
@@ -120,6 +119,7 @@ async def on_message(ctx):
 @commands.has_role(role_admin)
 async def presencas(ctx, canal = None):
     if canal == None:
+        
         await ctx.send('Presenças no servidor no dia: ' + str(datetime.now().date()) + ' às ' + time.strftime(r"%H:%M") + 'H')
         with open('presencas_' + str(datetime.now().date()) + '.csv', 'w', newline='') as file:
 
@@ -159,8 +159,8 @@ async def lembrete(ctx, arg):
     if arg == 'sap':
 
         role = 839182749452992639
-        minutos_antecedencia = 59
-        hora_evento = datetime(time.year, time.month, time.day, 10, 2-int(minutos_antecedencia))
+        minutos_antecedencia = 2
+        hora_evento = datetime(time.year, time.month, time.day, 18, 15-int(minutos_antecedencia))
         lembrete = (hora_evento - time).total_seconds()
  
         await asyncio.sleep(lembrete)
@@ -314,3 +314,4 @@ ApagaMensagens.start()
 
 
 bot.run(token)
+

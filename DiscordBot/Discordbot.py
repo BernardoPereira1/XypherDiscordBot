@@ -22,8 +22,6 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 bot.remove_command("help")
 
 
-#Teste Push
-
 # ID's e variaveis para uso geral
 #Roles:
 role_admin = 839182749452992640

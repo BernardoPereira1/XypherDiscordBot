@@ -31,9 +31,6 @@ role_aluno = 839182749452992639
 sala_texto_admin = 839182749758652557
 sala_do_20 = 839182750673666124
 
-#Variaveis
-time = datetime.now(pytz.timezone('Europe/Lisbon'))
-
 
 #ID's para o comando exame 
 #Roles:
@@ -56,6 +53,7 @@ async def on_message(message):
 @bot.command()
 @commands.has_role(role_admin)
 async def exame(ctx, inicioprova, primeirotempo, segundotempo, finalprova, link):
+    time = datetime.now(pytz.timezone('Europe/Lisbon'))
 
     # Variaveis utilizadas neste comando
     channel = bot.get_channel(sala_do_20)  # ID do canal "Sala do 20"
@@ -118,6 +116,7 @@ async def on_message(ctx):
 @bot.command(name='presencas')
 @commands.has_role(role_admin)
 async def presencas(ctx, canal = None):
+    time = datetime.now(pytz.timezone('Europe/Lisbon'))
     if canal == None:
         
         await ctx.send('Presenças no servidor no dia: ' + str(datetime.now().date()) + ' às ' + time.strftime(r"%H:%M") + 'H')
@@ -155,6 +154,7 @@ async def presencas(ctx, canal = None):
 # Lembrete Eventos
 @bot.command()
 async def lembrete(ctx, arg):
+    time = datetime.now(pytz.timezone('Europe/Lisbon'))
     
     if arg == 'sap':
 

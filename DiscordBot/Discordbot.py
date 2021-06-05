@@ -289,22 +289,18 @@ async def faq(ctx):
 
 
 # Comando de ajuda(exame) só para admins
-@faq.command()
+@faq.command(aliases=['1'])
 async def numero1(ctx):
     
-    await ctx.send(ctx.message.author.mention)
-    
-    embed = discord.Embed(title="Como utilizar os comandos?", description='Usa "!" juntamente com o nome do comando')
+    embed = discord.Embed(title="Como utilizar os comandos?", description= ctx.message.author.mention + ' usa "!" juntamente com o nome do comando')
 
     await ctx.send(embed=embed)
     
     
-@faq.command()
+@faq.command(aliases=['2'])
 async def numero2(ctx):
     
-    await ctx.send(ctx.message.author.mention)
-    
-    embed = discord.Embed(title="Como envio as resoluções do plano semanal?", description='Tira uma fotografia e envia um email para resolucoes@overfit.study')
+    embed = discord.Embed(title="Como envio as resoluções do plano semanal?", description= ctx.message.author.mention +' tira uma fotografia e envia um email para resolucoes@overfit.study')
 
     await ctx.send(embed=embed)
 
@@ -317,10 +313,11 @@ async def ApagaMensagens(amount=5000000000):
 
     messagessala1 = []
 
-    async for message in sala1.history(limit=amount + 1):
-        messagessala1.append(message)
 
-    await sala1.delete_messages(messagessala1)
+    async for message in sala1.history(limit=amount):
+        if 0 < amount:
+            messagessala1.append(message)
+            await sala1.delete_messages(messagessala1)
 
 
 @ApagaMensagens.before_loop

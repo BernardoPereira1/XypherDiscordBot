@@ -134,7 +134,7 @@ async def presencas(ctx, canal = None):
 
     else:
 
-        channel = bot.get_channel(int(canal))  # Canal de onde a lista vem
+        channel = get(ctx.guild.channels, name=str(canal))  # Canal de onde a lista vem
         members = channel.members  # Encontra os membros que estão no canal
 
         await ctx.send('Presenças no canal ' + channel.name + ' no dia ' + str(datetime.now().date()) + ' às ' + time.strftime(r"%H:%M") + 'H')

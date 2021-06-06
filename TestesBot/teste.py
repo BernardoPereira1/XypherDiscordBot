@@ -1,3 +1,4 @@
+from asyncio.windows_events import NULL
 from inspect import Arguments, Parameter
 from os import name
 import discord
@@ -154,45 +155,53 @@ async def presencas(ctx, canal = None):
 # Lembrete Eventos
 @bot.command()
 async def lembrete(ctx, arg):
-    time = datetime.now(pytz.timezone('Europe/Lisbon'))
-    
+
     if arg == 'sap':
 
-        role = 839182749452992639
-        minutos_antecedencia = 2
-        hora_evento = datetime(time.year, time.month, time.day, 18, 15-int(minutos_antecedencia))
-        lembrete = (hora_evento - time).total_seconds()
- 
-        await asyncio.sleep(lembrete)
+        while True:
 
-        role = get(ctx.guild.roles, id=int(role))
+            formato = '%H:%M:%S'
+            time = datetime.now()
+            tempo_antecedencia_sap = '00:01:00'
+            hora_sap = '20:19:00'
+            lembrete_sap = datetime.strptime(hora_sap, formato) - datetime.strptime(tempo_antecedencia_sap, formato)
 
-        for user in ctx.guild.members:
-            message = 'Olá ' + user.name + '! ' + '\nNão te esqueças que a SAP começa dentro de ' + str(minutos_antecedencia) + ' minutos! Vemo-nos no canal de voz "Auditório". Até já!'
+            print(time)
+            print(lembrete_sap)
 
-            if role in user.roles:
-                userDM = await user.create_dm() if (user.dm_channel is None) else user.dm_channel
-                if userDM != None:
-                    await userDM.send(message)
-    
+            
+            if datetime.now().strftime(formato) == lembrete_sap:
+
+                    role_id_sap = 839182749452992639
+                    role_sap = get(ctx.guild.roles, id=int(role_id_sap))
+
+                    for user in role_sap.members:
+                        message = 'Olá ' + user.name + '! ' + '\nNão te esqueças que a SAP começa dentro de ' + str(tempo_antecedencia_sap) + ' minutos! Vemo-nos no canal de voz "Auditório". Até já!'
+                        await user.send(message)
+            break
+
     if arg == 'sp':
 
-        role = 839182749452992639
-        minutos_antecedencia = 3
-        hora_evento = datetime(time.year, time.month, time.day, 18, 15-int(minutos_antecedencia))
-        lembrete = (hora_evento - time).total_seconds()
- 
-        await asyncio.sleep(lembrete)
+        while True:
 
-        role = get(ctx.guild.roles, id=int(role))
+            formato_sp = '%H:%M:%S'
+            time = datetime.now().time()
+            tempo_antecedencia_sp = '00:01:00'
+            hora_sp = '23:45:00'
+            lembrete_sp = datetime.strptime(hora_sp, formato_sp ) - datetime.strptime(tempo_antecedencia_sp, formato_sp)
 
-        for user in ctx.guild.members:
-            message = 'Olá ' + user.name + '! ' + '\nNão te esqueças que o SP começa dentro de ' + str(minutos_antecedencia) + ' minutos! Vemo-nos no canal de voz "Auditório". Até já!'
-            if role in user.roles:
-                userDM = await user.create_dm() if (user.dm_channel is None) else user.dm_channel
-                if userDM != None:
-                    await userDM.send(message)
+            print(lembrete_sp)
+            print(time)
 
+            if time == lembrete_sp:
+
+                role_id_sp = 839182749452992639
+                role_sp = get(ctx.guild.roles, id=int(role_id_sp))
+
+                for user in role_sp.members:
+                    message = 'Olá ' + user.name + '! ' + '\nNão te esqueças que o SP começa dentro de ' + str(tempo_antecedencia_sp) + ' minutos! Vemo-nos no canal de voz "Auditório". Até já!'
+                    await user.send(message)
+            break
 
 
 # Grupo de comandos Ajuda, dá informações sobre os comandos
@@ -312,15 +321,17 @@ async def numero2(ctx):
 
 # Loop que apaga mensagens de 24 em 24 horas
 @tasks.loop(hours=24)
-async def ApagaMensagens(amount=5000000000):
+async def ApagaMensagens(amount=100):
     sala1 = bot.get_channel(839182750166679622)
 
     messagessala1 = []
 
-    async for message in sala1.history(limit=amount + 1):
-        messagessala1.append(message)
 
-    await sala1.delete_messages(messagessala1)
+    async for message in sala1.history(limit=amount):
+        if 0 < amount:
+            messagessala1.append(message)
+            await sala1.delete_messages(messagessala1)
+
 
 
 @ApagaMensagens.before_loop

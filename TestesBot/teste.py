@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from inspect import Arguments, Parameter
 from os import name
 import discord
@@ -135,7 +134,7 @@ async def presencas(ctx, canal = None):
 
     else:
 
-        channel = bot.get_channel(int(canal))  # Canal de onde a lista vem
+        channel = get(ctx.guild.channels, name=str(canal))  # Canal de onde a lista vem
         members = channel.members  # Encontra os membros que estão no canal
 
         await ctx.send('Presenças no canal ' + channel.name + ' no dia ' + str(datetime.now().date()) + ' às ' + time.strftime(r"%H:%M") + 'H')
@@ -160,40 +159,34 @@ async def lembrete(ctx, arg):
 
         while True:
 
-            formato = '%H:%M:%S'
-            time = datetime.now()
-            tempo_antecedencia_sap = '00:01:00'
-            hora_sap = '20:19:00'
-            lembrete_sap = datetime.strptime(hora_sap, formato) - datetime.strptime(tempo_antecedencia_sap, formato)
-
-            print(time)
-            print(lembrete_sap)
-
+            time_sap = datetime.now().time().replace(microsecond=0)
+            formato_sap = '%H:%M:%S'
+            tempo_antecedencia_sap = timedelta(hours=0, minutes=1, seconds=0)
+            hora_sap = '12:16:00'
+            lembrete_sap = (datetime.strptime(hora_sap, formato_sap) - tempo_antecedencia_sap).time()
             
-            if datetime.now().strftime(formato) == lembrete_sap:
+            if time_sap == lembrete_sap:
 
-                    role_id_sap = 839182749452992639
-                    role_sap = get(ctx.guild.roles, id=int(role_id_sap))
+                role_id_sap = 839182749452992639
+                role_sap = get(ctx.guild.roles, id=int(role_id_sap))
 
-                    for user in role_sap.members:
-                        message = 'Olá ' + user.name + '! ' + '\nNão te esqueças que a SAP começa dentro de ' + str(tempo_antecedencia_sap) + ' minutos! Vemo-nos no canal de voz "Auditório". Até já!'
-                        await user.send(message)
-            break
-
+                for user in role_sap.members:
+                    message = 'Olá ' + user.name + '! ' + '\nNão te esqueças que a SAP começa dentro de ' + str(tempo_antecedencia_sap) + ' minutos! Vemo-nos no canal de voz "Auditório". Até já!'
+                    await user.send(message)
+                        
+                break
+        
     if arg == 'sp':
 
         while True:
-
+            
+            time_sp = datetime.now().time().replace(microsecond=0)
             formato_sp = '%H:%M:%S'
-            time = datetime.now().time()
-            tempo_antecedencia_sp = '00:01:00'
-            hora_sp = '23:45:00'
-            lembrete_sp = datetime.strptime(hora_sp, formato_sp ) - datetime.strptime(tempo_antecedencia_sp, formato_sp)
-
-            print(lembrete_sp)
-            print(time)
-
-            if time == lembrete_sp:
+            tempo_antecedencia_sp = timedelta(hours=0, minutes=1, seconds=0)
+            hora_sp = '12:17:00'
+            lembrete_sp = (datetime.strptime(hora_sp, formato_sp) - tempo_antecedencia_sp).time()
+            
+            if time_sp == lembrete_sp:
 
                 role_id_sp = 839182749452992639
                 role_sp = get(ctx.guild.roles, id=int(role_id_sp))
@@ -201,8 +194,9 @@ async def lembrete(ctx, arg):
                 for user in role_sp.members:
                     message = 'Olá ' + user.name + '! ' + '\nNão te esqueças que o SP começa dentro de ' + str(tempo_antecedencia_sp) + ' minutos! Vemo-nos no canal de voz "Auditório". Até já!'
                     await user.send(message)
-            break
-
+                        
+                break
+            
 
 # Grupo de comandos Ajuda, dá informações sobre os comandos
 @bot.group(invoke_without_command=True)
@@ -298,22 +292,18 @@ async def faq(ctx):
 
 
 # Comando de ajuda(exame) só para admins
-@faq.command()
+@faq.command(aliases=['1'])
 async def numero1(ctx):
     
-    await ctx.send(ctx.message.author.mention)
-    
-    embed = discord.Embed(title="Como utilizar os comandos?", description='Usa "!" juntamente com o nome do comando')
+    embed = discord.Embed(title="Como utilizar os comandos?", description= ctx.message.author.mention + ' usa "!" juntamente com o nome do comando')
 
     await ctx.send(embed=embed)
     
     
-@faq.command()
+@faq.command(aliases=['2'])
 async def numero2(ctx):
     
-    await ctx.send(ctx.message.author.mention)
-    
-    embed = discord.Embed(title="Como envio as resoluções do plano semanal?", description='Tira uma fotografia e envia um email para resolucoes@overfit.study')
+    embed = discord.Embed(title="Como envio as resoluções do plano semanal?", description= ctx.message.author.mention +' tira uma fotografia e envia um email para resolucoes@overfit.study')
 
     await ctx.send(embed=embed)
 
@@ -321,7 +311,7 @@ async def numero2(ctx):
 
 # Loop que apaga mensagens de 24 em 24 horas
 @tasks.loop(hours=24)
-async def ApagaMensagens(amount=100):
+async def ApagaMensagens(amount=5000000000):
     sala1 = bot.get_channel(839182750166679622)
 
     messagessala1 = []
@@ -331,7 +321,6 @@ async def ApagaMensagens(amount=100):
         if 0 < amount:
             messagessala1.append(message)
             await sala1.delete_messages(messagessala1)
-
 
 
 @ApagaMensagens.before_loop

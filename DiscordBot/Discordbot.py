@@ -154,46 +154,49 @@ async def presencas(ctx, canal = None):
 # Lembrete Eventos
 @bot.command()
 async def lembrete(ctx, arg):
-    time = datetime.now(pytz.timezone('Europe/Lisbon'))
-    
+
     if arg == 'sap':
 
-        role = 839182749452992639
-        minutos_antecedencia = 2
-        hora_evento = datetime(time.year, time.month, time.day, 18, 15-int(minutos_antecedencia))
-        lembrete = (hora_evento - time).total_seconds()
- 
-        await asyncio.sleep(lembrete)
+        while True:
 
-        role = get(ctx.guild.roles, id=int(role))
+            time_sap = datetime.now().time().replace(microsecond=0)
+            formato_sap = '%H:%M:%S'
+            tempo_antecedencia_sap = timedelta(hours=0, minutes=1, seconds=0)
+            hora_sap = '12:16:00'
+            lembrete_sap = (datetime.strptime(hora_sap, formato_sap) - tempo_antecedencia_sap).time()
+            
+            if time_sap == lembrete_sap:
 
-        for user in ctx.guild.members:
-            message = 'Olá ' + user.name + '! ' + '\nNão te esqueças que a SAP começa dentro de ' + str(minutos_antecedencia) + ' minutos! Vemo-nos no canal de voz "Auditório". Até já!'
+                role_id_sap = 839182749452992639
+                role_sap = get(ctx.guild.roles, id=int(role_id_sap))
 
-            if role in user.roles:
-                userDM = await user.create_dm() if (user.dm_channel is None) else user.dm_channel
-                if userDM != None:
-                    await userDM.send(message)
-    
+                for user in role_sap.members:
+                    message = 'Olá ' + user.name + '! ' + '\nNão te esqueças que a SAP começa dentro de ' + str(tempo_antecedencia_sap) + ' minutos! Vemo-nos no canal de voz "Auditório". Até já!'
+                    await user.send(message)
+                        
+                break
+        
     if arg == 'sp':
 
-        role = 839182749452992639
-        minutos_antecedencia = 3
-        hora_evento = datetime(time.year, time.month, time.day, 18, 15-int(minutos_antecedencia))
-        lembrete = (hora_evento - time).total_seconds()
- 
-        await asyncio.sleep(lembrete)
+        while True:
+            
+            time_sp = datetime.now().time().replace(microsecond=0)
+            formato_sp = '%H:%M:%S'
+            tempo_antecedencia_sp = timedelta(hours=0, minutes=1, seconds=0)
+            hora_sp = '12:17:00'
+            lembrete_sp = (datetime.strptime(hora_sp, formato_sp) - tempo_antecedencia_sp).time()
+            
+            if time_sp == lembrete_sp:
 
-        role = get(ctx.guild.roles, id=int(role))
+                role_id_sp = 839182749452992639
+                role_sp = get(ctx.guild.roles, id=int(role_id_sp))
 
-        for user in ctx.guild.members:
-            message = 'Olá ' + user.name + '! ' + '\nNão te esqueças que o SP começa dentro de ' + str(minutos_antecedencia) + ' minutos! Vemo-nos no canal de voz "Auditório". Até já!'
-            if role in user.roles:
-                userDM = await user.create_dm() if (user.dm_channel is None) else user.dm_channel
-                if userDM != None:
-                    await userDM.send(message)
-
-
+                for user in role_sp.members:
+                    message = 'Olá ' + user.name + '! ' + '\nNão te esqueças que o SP começa dentro de ' + str(tempo_antecedencia_sp) + ' minutos! Vemo-nos no canal de voz "Auditório". Até já!'
+                    await user.send(message)
+                        
+                break
+            
 
 # Grupo de comandos Ajuda, dá informações sobre os comandos
 @bot.group(invoke_without_command=True)

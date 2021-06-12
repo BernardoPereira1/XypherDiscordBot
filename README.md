@@ -1,4 +1,4 @@
-basketballcrawler
+Discord Bot
 ==================
 
 [![Join the chat at https://gitter.im/andrewgiessel/basketballcrawler](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/andrewgiessel/basketballcrawler?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

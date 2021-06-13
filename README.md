@@ -7,6 +7,20 @@
 <h3 align=center>A fully customizable bot built with <a href=https://discordpy.readthedocs.io/en/stable/>discord.py</a></h3>
 
 
+<p align="center">
+  <a href="#about">About</a>
+  •
+  <a href="#Features">Features</a>
+  •
+  <a href="https://github.com/Spiderjockey02/Discord-Bot/blob/master/docs/INSTALLATION.md">Installation</a>
+  •
+  <a href="#license">License</a>
+  •
+  <a href="#credits">Credits</a>
+</p>
+
+
+
 ❓ About
 ------------
 Xypher is an open source, fully customizable Discord Bot. Xypher was designed to work on study servers and its main function is to help teachers to perform complex tasks in a simplified way. An example of this is the function of counting how many people are present in a channel by just using a simple command instead of counting one by one. 

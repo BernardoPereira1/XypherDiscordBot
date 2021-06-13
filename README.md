@@ -10,15 +10,15 @@
 <p align="center">
   <a href="https://github.com/BernardoPereira1/Projetos-GitHub-Bernardo#-about">About</a>
   •
-  <a href="#Features">Requirements</a>
+  <a href="https://github.com/BernardoPereira1/Projetos-GitHub-Bernardo#-requirements">Requirements</a>
   •
-  <a href="#Features">Features</a>
+  <a href="https://github.com/BernardoPereira1/Projetos-GitHub-Bernardo#-features">Features</a>
   •
-  <a href="https://github.com/Spiderjockey02/Discord-Bot/blob/master/docs/INSTALLATION.md">To-do</a>
+  <a href="https://github.com/BernardoPereira1/Projetos-GitHub-Bernardo#-to-do">To-do</a>
   •
-  <a href="#license">My other projects</a>
+  <a href="https://github.com/BernardoPereira1/Projetos-GitHub-Bernardo#%EF%B8%8F-my-other-projects">My other projects</a>
   •
-  <a href="#credits">Credits</a>
+  <a href="https://github.com/BernardoPereira1/Projetos-GitHub-Bernardo#-credits">Credits</a>
 </p>
 
 

@@ -8,13 +8,15 @@
 
 
 <p align="center">
-  <a href="#about">About</a>
+  <a href="https://github.com/BernardoPereira1/Projetos-GitHub-Bernardo#-about">About</a>
+  •
+  <a href="#Features">Requirements</a>
   •
   <a href="#Features">Features</a>
   •
-  <a href="https://github.com/Spiderjockey02/Discord-Bot/blob/master/docs/INSTALLATION.md">Installation</a>
+  <a href="https://github.com/Spiderjockey02/Discord-Bot/blob/master/docs/INSTALLATION.md">To-do</a>
   •
-  <a href="#license">License</a>
+  <a href="#license">My other projects</a>
   •
   <a href="#credits">Credits</a>
 </p>

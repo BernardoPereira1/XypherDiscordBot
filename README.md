@@ -1,37 +1,54 @@
-Discord Bot
-==================
+<h1 align="center">
+  <br>
+      Xypher
+  <br>
+</h1>
 
-[![Join the chat at https://gitter.im/andrewgiessel/basketballcrawler](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/andrewgiessel/basketballcrawler?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
-This is a python module to scrape [basketball-reference.com](http://www.basketball-reference.com/) and convert various
-stats into usable data structures for analysis.
-
-[Here](example_notebook.ipynb) is a link to a
-sample IPython Notebook file demonstrating the library.
+<h3 align=center>A fully customizable bot built with <a href=https://discordpy.readthedocs.io/en/stable/>discord.py</a></h3>
 
 
-Requirements
+❓ About
+------------
+Xypher is an open source, fully customizable Discord Bot. Xypher was designed to work on study servers and its main function is to help teachers to perform complex tasks in a simplified way. An example of this is the function of counting how many people are present in a channel by just using a simple command instead of counting one by one. 
+Xypher comes packaged with a variety of commands and it's still growing up.
+
+If you liked this repository, feel free to leave a star ⭐ to help promote Xypher!
+
+❗ Requirements
+----------------
+
+- [Asyncio](https://docs.python.org/3/library/asyncio.html)
+- [Pytz](https://pypi.org/project/pytz/)
+
+
+📜 Features
 ------------
 
-- [Beautiful Soup](http://www.crummy.com/software/BeautifulSoup/bs4/doc/#) >= 4.0
-- [pandas](http://pandas.pydata.org/) >= 0.11
-- [request](http://docs.python-requests.org/en/master/) >= 2.0
+**Commands:**
+
+*   `!ola` : Xypher says "hello" to the person who used the command.
+*   `!exame <timetostart><firsttime><secondtime><thirdtime><examlink>` : Xypher starts an exam depending on the times the administrator gives.
+*   `!numeromembros` : Xypher says the number of people that are on the server.
+*   `!presencas <channel>` : Xypher sends a csv file with the names and tags of the people who are on the given channel or if the given channel is None Xypher will send a csv file with the people that are online.
+*   `!lembrete` : Xypher remindes a certain role that they have events coming **(still developing)**.
+*   `!ajuda` : Xypher shows a list with all the commands that are on the server, and give you info about each one.
+*   `!faq` : Xypher shows a list of frequently asked questions as well as the answers for each one.
+ 
+**Features:**
+
+  * **Xypher cleans all the messages in specific channels every 24hours** 
 
 
-Usage
------
+📝 To-Do
+--------------
+Get the "lembrete" command working 
+Make a feature that react to messages in a specific channel.
 
-Still developing the API.  Right now you can get a list of all player overview urls, generate a list of game log urls for
-a given player, and convert that list into pandas dataframe.
+🖥️ My other projects
+-----------------------
+Current None ☹️, but little by little I will develope new things 😁
 
-
-Notes
------
-
-`players.json` was generated on 02/11/2016 by `buildPlayerDictionary()` and `savePlayerDictionary()`.
-I'd recommend building your own, fresh copy. It takes about 10 minutes to scrape from the site.
-To create the most recent `players.json`, you can use as follows.
-
-```python
-import basketballCrawler as bc
-players = bc.buildPlayerDictionary()
+📖 Credits
+----------------------
+This project was all done by me with a little help of my internship monitors
+My Discord: **Bernardo Pereira#3629**

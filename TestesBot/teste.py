@@ -1,5 +1,5 @@
 from inspect import Arguments, Parameter
-import os
+from os import name
 import discord
 from discord import message
 from discord import embeds
@@ -167,13 +167,9 @@ async def presencas(ctx, canal=None):
 
     time = datetime.now(pytz.timezone('Europe/Lisbon'))
     if canal == None:
-        
-        save_path = '\Presencas'
-        file_name = '\presencas_' + str(datetime.now().date()) + '.csv'
-        complete_path = os.path.join(save_path, file_name)
 
         await ctx.send('Presenças no servidor no dia: ' + str(datetime.now().date()) + ' às ' + time.strftime(r"%H:%M") + 'H')
-        with open(complete_path, 'w', newline='') as file:
+        with open('presencas_' + str(datetime.now().date()) + '.csv', 'w', newline='') as file:
 
             writer = csv.writer(file, delimiter=':', quoting=csv.QUOTE_NONE)
             writer.writerow(['Nome, tag, timestamp'])
@@ -448,3 +444,4 @@ async def before():
 ApagaMensagens.start()
 
 bot.run(token)
+

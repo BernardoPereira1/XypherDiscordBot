@@ -1,5 +1,5 @@
 from inspect import Arguments, Parameter
-from os import name
+import os
 import discord
 from discord import message
 from discord import embeds
@@ -13,7 +13,10 @@ import pytz
 from discord.utils import get
 
 
-token = 'ODM5MTQ2NDIzMTMxNzAxMjc4.YJFaAQ.lD6YQsnYp9WYDR5ofDpgaENlp3U'
+pasta = "DiscordBot"
+ficheiro = "token.txt"
+diretorio = os.path.join(pasta, ficheiro)
+token = open(diretorio, "r").readline()
 
 
 intents = discord.Intents().all()
@@ -165,11 +168,17 @@ async def presencas(ctx, canal=None):
         in addition it also shows the time at which these people were in the channel.
     """
 
+    
     time = datetime.now(pytz.timezone('Europe/Lisbon'))
+
     if canal == None:
 
+        pasta = "DiscordBot\Presencas"
+        ficheiro = 'presencas_' + str(datetime.now().date()) + '.csv'
+        diretorio = os.path.join(pasta, ficheiro)
+
         await ctx.send('Presenças no servidor no dia: ' + str(datetime.now().date()) + ' às ' + time.strftime(r"%H:%M") + 'H')
-        with open('presencas_' + str(datetime.now().date()) + '.csv', 'w', newline='') as file:
+        with open(diretorio, 'w', newline='') as file:
 
             writer = csv.writer(file, delimiter=':', quoting=csv.QUOTE_NONE)
             writer.writerow(['Nome, tag, timestamp'])
@@ -180,7 +189,7 @@ async def presencas(ctx, canal=None):
                 if user.status != discord.Status.offline:
                     writer.writerow([user.name + ', ' + '#'+user.discriminator + ', ' + str(datetime.now().date()) + ' ' + time.strftime(r"%H:%M") + 'H'])
 
-        await ctx.send(file=discord.File(r'presencas_' + str(datetime.now().date()) + '.csv'))
+        await ctx.send(file=discord.File(diretorio))
 
     else:
 
@@ -188,8 +197,12 @@ async def presencas(ctx, canal=None):
         channel = get(ctx.guild.channels, name=str(canal))
         members = channel.members  # Encontra os membros que estão no canal
 
+        pasta = "DiscordBot\Presencas"
+        ficheiro = 'presencas_canal_' + channel.name + '_' + str(datetime.now().date()) + '.csv'
+        diretorio = os.path.join(pasta, ficheiro)
+
         await ctx.send('Presenças no canal ' + channel.name + ' no dia ' + str(datetime.now().date()) + ' às ' + time.strftime(r"%H:%M") + 'H')
-        with open('presencas_canal_' + channel.name + '_' + str(datetime.now().date()) + '.csv', 'w', newline='') as file:
+        with open(diretorio, 'w', newline='') as file:
 
             writer = csv.writer(file, delimiter=':', quoting=csv.QUOTE_NONE)
             writer.writerow(['Nome, tag, timestamp'])
@@ -199,7 +212,7 @@ async def presencas(ctx, canal=None):
                 if user.status != discord.Status.offline:
                     writer.writerow([user.name + ', ' + '#'+user.discriminator + ', ' + str(datetime.now().date()) + ' ' + time.strftime(r"%H:%M") + 'H'])
 
-        await ctx.send(file=discord.File(r'presencas_canal_' + channel.name + '_' + str(datetime.now().date()) + '.csv'))
+        await ctx.send(file=discord.File(diretorio))
 
 
 # Lembrete Eventos
@@ -443,4 +456,5 @@ async def before():
 
 ApagaMensagens.start()
 
-bot.run(token)
+
+bot.run(token.strip())

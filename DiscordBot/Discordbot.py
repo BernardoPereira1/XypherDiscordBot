@@ -274,6 +274,12 @@ async def lembrete(ctx, arg):
                 break
 
 
+@bot.event
+async def on_message(message):
+    if(message.channel.id == 855157609577709579):
+        await bot.add_reaction(message, ':wave:')
+
+
 # Grupo de comandos Ajuda, dá informações sobre os comandos
 @bot.group(invoke_without_command=True)
 async def ajuda(ctx):

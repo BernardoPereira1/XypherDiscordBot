@@ -47,10 +47,8 @@ async def on_ready():
 @bot.command(name='ola')
 async def on_message(message):
     """This function makes the bot respond to the "ola" command.
-
     Args:
         None
-
     Returns:
         A message saying "Hello" together with the username of the person that gived the command.
     """
@@ -62,17 +60,14 @@ async def on_message(message):
 @commands.has_role(role_admin)
 async def exame(ctx, inicioprova, primeirotempo, segundotempo, finalprova, link):
     """This function allows admins on the server to start an exam whenever they want.
-
     Args:
         inicioprova(int): Time in minutes till the exam starts.
         primeirotempo(int): The duration in minutes of the first time of the exam.
         segundotempo(int): The duration in minutes of the second time of the exam.
         finalprova(int): The duration in minutes of the last time of the exam.
         link(str): The link of the exam, for example a Google Drive link
-
     Note:
         The link needs to have the "https" part or it will not work.
-
     Returns:
         First the bot will send a "calendar" with the times when the things will happen.
         Then when it's time to start the exam the bot will send the exam link and a couple of instructions.
@@ -137,10 +132,8 @@ async def exame(ctx, inicioprova, primeirotempo, segundotempo, finalprova, link)
 @bot.command(name='numeromembros')
 async def on_message(ctx):
     """This function lets you know the number of people there are on the server by giving the command "numeromebros".
-
     Args:
         None
-
     Returns:
         The bot sends a message with the number of people.
     """
@@ -153,13 +146,10 @@ async def on_message(ctx):
 async def presencas(ctx, canal=None):
     """This function allows admins on the server to know how much people are online in a specific channel at the time that 
        the command "presencas" is given.
-
     Args:
         canal(str): The name of the channel.
-
     Note:
         If the name of the channel as spaces in it you need to use quotation marks or i will not work.
-
     Returns:
         The bot sends a csv file with the username and tag of the people present in the specified channel, 
         in addition it also shows the time at which these people were in the channel.
@@ -207,13 +197,10 @@ async def presencas(ctx, canal=None):
 @commands.has_role(role_admin)
 async def lembrete(ctx, arg):
     """This command creates a reminder that remind a certain role that they have events comming.
-
     Args:
         arg(str): This argument as two variations "sap" and "sp".
-
     Note:
         This command is not fully working.
-
     Returns:
         The bot sends a message warning the specified role that the event will start within a certain time. 
         This time is defined hardcoded in the variable "tempo_antecedencia".
@@ -266,17 +253,14 @@ async def lembrete(ctx, arg):
 @bot.group(invoke_without_command=True)
 async def ajuda(ctx):
     """This group of commands gives information about other commands.
-
     Args:
         exame(str): Use this to get info about "exame" command
         presencas(str): Use this to get info about "presencas" command
         lembrete(str): Use this to get info about "lembrete" command
         ola(str): Use this to get info about "ola" command
         numeromembros(str): Use this to get info about "numeromembros" command
-
     Note:
         If a normal user try to use this command to get info about admin commands it will not work.
-
     Returns:
         When the command "ajuda" is used the bot sends a list of the different commands that are on the server.
         If you want to get info about a command just use "ajuda" together with the name of the command.
@@ -347,12 +331,9 @@ async def numeromembros(ctx):
 @bot.group(invoke_without_command=True)
 async def faq(ctx):
     """This group of commands gives answers to frequently asked questions.
-
     Args:
         1(int): Use this if you want the answer to the first question on the list.
         2(int): Use this if you want the answer to the second question on the list.
-
-
     Returns:
         When the command "faq" is used the bot sends a list of the different questions that are frequently asked.
         If you want to get the answer about that question just use "faq" together with number of the question.
@@ -390,10 +371,8 @@ async def numero2(ctx):
 async def ApagaMensagens():
     """This function clears 3000 messages in the specified channels and after that the bot sends a message saying something
     and he will do this process every 24 hours.
-
     Args:
         None
-
     Returns:
         The bot sends a message after the channel is cleared.
     """
@@ -444,4 +423,3 @@ async def before():
 ApagaMensagens.start()
 
 bot.run(token)
-

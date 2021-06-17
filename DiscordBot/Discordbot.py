@@ -59,6 +59,36 @@ async def on_message(message):
     await message.channel.send(f'Olá {message.author.mention} :grinning:')
 
 
+# Comando para saber quantos membros existem no servidor
+@bot.command(name='numeromembros')
+async def on_message(ctx):
+    """This function lets you know the number of people there are on the server by giving the command "numeromebros".
+
+    Args:
+        None
+
+    Returns:
+        The bot sends a message with the number of people.
+    """
+    await ctx.send('Há ' + str(ctx.guild.member_count) + ' membros no servidor')
+
+
+# Evento React
+@bot.event
+async def on_message(message):
+    """This function makes the bot reacts to every message in a specified channel.
+
+    Args:
+        None
+
+    Returns:
+        The bot reacts to every message on the channel.
+    """
+    if (message.channel.id == 855157609577709579):
+        await message.add_reaction('👋')
+    await bot.process_commands(message)
+
+
 # Comando Exame
 @bot.command()
 @commands.has_role(role_admin)
@@ -134,19 +164,6 @@ async def exame(ctx, inicioprova, primeirotempo, segundotempo, finalprova, link)
     await channel.send('Bom fim-de-semana! <@&'+aluno_id+'> :point_up:\n'
                        '-------------------------------------------------------------------------------------------------------------')
 
-
-# Comando para saber quantos membros existem no servidor
-@bot.command(name='numeromembros')
-async def on_message(ctx):
-    """This function lets you know the number of people there are on the server by giving the command "numeromebros".
-
-    Args:
-        None
-
-    Returns:
-        The bot sends a message with the number of people.
-    """
-    await ctx.send('Há ' + str(ctx.guild.member_count) + ' membros no servidor')
 
 
 # Comando para saber quantas pessoas estão presentes no servidor e num canal especifico
@@ -272,12 +289,6 @@ async def lembrete(ctx, arg):
                     await user.send(message)
 
                 break
-
-
-@bot.event
-async def on_message(message):
-    if(message.channel.id == 855157609577709579):
-        await bot.add_reaction(message, ':wave:')
 
 
 # Grupo de comandos Ajuda, dá informações sobre os comandos

@@ -13,9 +13,8 @@ import pytz
 from discord.utils import get
 
 
-pasta = "DiscordBot"
-ficheiro = "token.txt"
-diretorio = os.path.join(pasta, ficheiro)
+
+diretorio = '/home/ubuntu/Projetos-GitHub-Bernardo/DiscordBot/token.txt'
 token = open(diretorio, "r").readline()
 
 
@@ -173,7 +172,7 @@ async def presencas(ctx, canal=None):
 
     if canal == None:
 
-        pasta = "DiscordBot\Presencas"
+        pasta = '/home/ubuntu/Projetos-GitHub-Bernardo/DiscordBot/Presencas'
         ficheiro = 'presencas_' + str(datetime.now().date()) + '.csv'
         diretorio = os.path.join(pasta, ficheiro)
 
@@ -197,7 +196,7 @@ async def presencas(ctx, canal=None):
         channel = get(ctx.guild.channels, name=str(canal))
         members = channel.members  # Encontra os membros que estão no canal
 
-        pasta = "DiscordBot\Presencas"
+        pasta = '/home/ubuntu/Projetos-GitHub-Bernardo/DiscordBot/Presencas'
         ficheiro = 'presencas_canal_' + channel.name + '_' + str(datetime.now().date()) + '.csv'
         diretorio = os.path.join(pasta, ficheiro)
 

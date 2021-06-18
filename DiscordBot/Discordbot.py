@@ -33,6 +33,7 @@ role_aluno = 839182749452992639
 sala_texto_admin = 839182749758652557
 sala_do_20 = 839182750673666124
 sala_introducoes = 855157609577709579
+sala_bemvindo = 839182749758652561
 
 
 # ID's para o comando exame
@@ -44,6 +45,30 @@ aluno_id = '839182749452992639'
 @bot.event
 async def on_ready():
     print('O bot está on')
+
+
+@bot.event
+async def on_message(message):
+    """This function welcome every one on the server.
+
+    Args:
+        None
+
+    Returns:
+        The bot welcome every one that enters in the server.
+    """
+    if (message.channel.id == sala_introducoes):
+        await message.add_reaction('👋')
+
+    diretorio = r'C:\Users\berna\Ambiente de Trabalho\Projetos-GitHub-Bernardo\TestesBot\palavras.txt'
+    with open(diretorio, "r", encoding='utf-8') as file:   
+        file = file.read().split()
+
+    for palavra in file:
+        if palavra in message.content.lower():
+            await message.delete()
+            await message.channel.send(f'Não uses essa palavra aqui {message.author.mention}!')
+    await bot.process_commands(message)
 
 
 # Comando Olá
@@ -74,20 +99,34 @@ async def on_message(ctx):
     await ctx.send('Há ' + str(ctx.guild.member_count) + ' membros no servidor')
 
 
-# Evento React
+
+@bot.command()
+@commands.has_role(role_admin)
+async def limpar(ctx, numero=2000):
+    """This function let the admins erase 2000 messages or a specific amount of messages.
+
+    Args:
+        numero(int): The amount of messages.
+
+    Returns:
+        The bot purge the messages.
+    """
+
+    await ctx.channel.purge(limit=numero)
+
+
 @bot.event
-async def on_message(message):
-    """This function makes the bot reacts to every message in a specified channel.
+async def on_member_join(member):
+    """This function welcome every one on the server.
 
     Args:
         None
 
     Returns:
-        The bot reacts to every message on the channel.
+        The bot welcome every one that enters in the server.
     """
-    if (message.channel.id == sala_introducoes):
-        await message.add_reaction('👋')
-    await bot.process_commands(message)
+    channel = bot.get_channel(sala_bemvindo)
+    await channel.send(f"Bem vindo {member.mention} !")
 
 
 # Comando Exame

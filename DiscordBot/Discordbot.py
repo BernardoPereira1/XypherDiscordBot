@@ -60,7 +60,7 @@ async def on_message(message):
     if (message.channel.id == sala_introducoes):
         await message.add_reaction('👋')
 
-    diretorio = r'C:\Users\berna\Ambiente de Trabalho\Projetos-GitHub-Bernardo\TestesBot\palavras.txt'
+    diretorio = r'/home/ubuntu/Projetos-GitHub-Bernardo/DiscordBot/palavras.txt'
     with open(diretorio, "r", encoding='utf-8') as file:   
         file = file.read().split()
 
@@ -234,7 +234,7 @@ async def presencas(ctx, canal=None):
         diretorio = os.path.join(pasta, ficheiro)
 
         await ctx.send('Presenças no servidor no dia: ' + str(datetime.now().date()) + ' às ' + time.strftime(r"%H:%M") + 'H')
-        with open(diretorio, 'w', newline='') as file:
+        with open(diretorio, 'w', newline='', encoding='utf-8') as file:
 
             writer = csv.writer(file, delimiter=':', quoting=csv.QUOTE_NONE)
             writer.writerow(['Nome, tag, timestamp'])
@@ -258,7 +258,7 @@ async def presencas(ctx, canal=None):
         diretorio = os.path.join(pasta, ficheiro)
 
         await ctx.send('Presenças no canal ' + channel.name + ' no dia ' + str(datetime.now().date()) + ' às ' + time.strftime(r"%H:%M") + 'H')
-        with open(diretorio, 'w', newline='') as file:
+        with open(diretorio, 'w', newline='', encoding='utf-8') as file:
 
             writer = csv.writer(file, delimiter=':', quoting=csv.QUOTE_NONE)
             writer.writerow(['Nome, tag, timestamp'])

@@ -49,13 +49,14 @@ async def on_ready():
 
 @bot.event
 async def on_message(message):
-    """This function welcome every one on the server.
+    """This function "on_ready" react to messages in a specific channel and deletes bad words.
 
     Args:
         None
 
     Returns:
-        The bot welcome every one that enters in the server.
+        When someone sends a message on a specific channel the bot react to their message.
+        The bot delete messages that contains bad words, this bad words are defined on a .txt file.
     """
     if (message.channel.id == sala_introducoes):
         await message.add_reaction('👋')

@@ -32,6 +32,7 @@ role_aluno = 839182749452992639
 # Salas de texto:
 sala_texto_admin = 839182749758652557
 sala_do_20 = 839182750673666124
+sala_introducoes = 855157609577709579
 
 
 # ID's para o comando exame
@@ -84,7 +85,7 @@ async def on_message(message):
     Returns:
         The bot reacts to every message on the channel.
     """
-    if (message.channel.id == 855157609577709579):
+    if (message.channel.id == sala_introducoes):
         await message.add_reaction('👋')
     await bot.process_commands(message)
 

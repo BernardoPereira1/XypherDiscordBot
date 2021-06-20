@@ -84,6 +84,7 @@ async def on_message(message):
         A message saying "Hello" together with the username of the person that gived the command.
     """
     await message.channel.send(f'Olá {message.author.mention} :grinning:')
+    await bot.process_commands(message)
 
 
 # Comando para saber quantos membros existem no servidor
@@ -98,6 +99,7 @@ async def on_message(ctx):
         The bot sends a message with the number of people.
     """
     await ctx.send('Há ' + str(ctx.guild.member_count) + ' membros no servidor')
+    await bot.process_commands(message)
 
 
 

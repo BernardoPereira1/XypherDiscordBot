@@ -55,7 +55,8 @@ If you liked this repository, feel free to leave a star ⭐ to help promote Xyph
 
   * **Xypher cleans all the messages in specific channels every 24hours** 
   * **Xypher welcome all new members** 
-  * **Xypher react to every message on the presentation channel** 
+  * **Xypher react to every message on the presentation channel**
+  * **Cypher excludes messages that contain specific words that are defined in a .text file**
 
 
 📝 To-Do

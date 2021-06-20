@@ -60,7 +60,7 @@ async def on_message(message):
     if (message.channel.id == sala_introducoes):
         await message.add_reaction('👋')
 
-    diretorio = r'C:\Users\berna\Ambiente de Trabalho\Projetos-GitHub-Bernardo\TestesBot\palavras.txt'
+    diretorio = r'/home/ubuntu/Projetos-GitHub-Bernardo/DiscordBot/palavras.txt'
     with open(diretorio, "r", encoding='utf-8') as file:   
         file = file.read().split()
 

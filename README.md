@@ -4,7 +4,7 @@
   <br>
 </h1>
 
-<h3 align=center>A fully customizable bot built with <a href=https://discordpy.readthedocs.io/en/stable/>discord.py</a></h3>
+<h3 align=center>A study bot built with <a href=https://discordpy.readthedocs.io/en/stable/>discord.py</a></h3>
 
 
 <p align="center">
@@ -49,10 +49,14 @@ If you liked this repository, feel free to leave a star ⭐ to help promote Xyph
 *   `!lembrete` : Xypher remindes a certain role that they have events coming **(still developing)**.
 *   `!ajuda` : Xypher shows a list with all the commands that are on the server, and give you info about each one.
 *   `!faq` : Xypher shows a list of frequently asked questions as well as the answers for each one.
+*   `!limpar <amount>` : Xypher cleans 2000 messages by default or the amount of messages given.
  
 **Features:**
 
   * **Xypher cleans all the messages in specific channels every 24hours** 
+  * **Xypher welcome all new members** 
+  * **Xypher react to every message on the presentation channel**
+  * **Cypher excludes messages that contain specific words that are defined in a .text file**
 
 
 📝 To-Do

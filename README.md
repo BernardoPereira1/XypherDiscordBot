@@ -61,8 +61,8 @@ If you liked this repository, feel free to leave a star ⭐ to help promote Xyph
 
 📝 To-Do
 --------------
-Get the "lembrete" command working 
-Make a feature that react to messages in a specific channel.
+* Get the "lembrete" command working 
+* Make a feature that react to messages in a specific channel.
 
 🖥️ My other projects
 -----------------------
